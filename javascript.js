@@ -184,8 +184,8 @@ function score(){
 }
 
 function mensaje(cadena){
-    var lon = (canvas.width-(53*cadena.length))/2;
-    ctx.fillStyle = "green";
+    var lon = (canvas.width-(25*cadena.length))/2;
+    ctx.fillStyle = "red";
     ctx.clearRect(0,0,canvas.width, canvas.height);
     ctx.font = "bold 50px Rosewood Std";
     ctx.fillText(cadena,lon,220);   
@@ -220,6 +220,17 @@ function colisiones(){
             }
         }
     }
+}
+
+function ganoperro(){
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    balas_array = [];
+    enemigos_array = [];
+    balasEnemigas_array = [];
+    clearTimeout(de);
+    finJuego = true;
+    mensaje("Gano Perro");
+    gano.play();
 }
 function gameOver(){
     ctx.clearRect(0,0,canvas.width, canvas.height);
@@ -273,7 +284,7 @@ function pinta(){
             if(enemigos_array[i].y==jugador.y) gameOver();  
         }
     }
-    if(numEnemigos==0) gameOver();
+    if(numEnemigos==0) ganoperro(); //modificar para juego ganado
 }
 function disparaEnemigo(){
     var ultimos = new Array();
@@ -315,6 +326,7 @@ window.onload = function(){
             var disparo = document.getElementById("disparo");
             var intro = document.getElementById("intro");
             var fin = document.getElementById("fin");
+            var gano = document.getElementById("gano");
             x = canvas.width/2;
 
             mensaje("INVASORES");
